@@ -1,6 +1,8 @@
 %!TEX TS-program = lualatex
 \documentclass[a4paper]{ctexart}
 \usepackage{luacode}
+\usepackage[english,french]{babel}
+\babelfont{rm}{DejaVu Serif}
 \usepackage{tipa}
 \usepackage{lipsum}
 \usepackage{forloop}
@@ -121,16 +123,14 @@
     result = result .. fphone[letter].tipa
     end
     result = result .. "/}"
-  tex.print(result)
+  tex.print(result) 
   end
 \end{luacode*}
 \newcommand{\mytipa}[1]{\directlua{TIPA([[#1]])}}
 \newcommand{\myftipa}[1]{\directlua{FTIPA([[#1]])}}
 %environment setting
 \newcounter{word}
-\newenvironment{word}[3]{\par\refstepcounter{word}\noindent\theword. \textbf{#1} \mytipa{/#2/}\hfill \stars{#3}}{\vspace{0.4cm}}
-\newcounter{newword}
-\newenvironment{newword}[3]{\par\refstepcounter{word}\noindent\theword. \textbf{#1} #2\hfill \stars{#3}}{\vspace{0.4cm}}
+\newenvironment{word}[3]{\par\refstepcounter{word}\noindent\theword. \textbf{#1} #2\hfill \stars{#3}}{\vspace{0.4cm}}
 \newcounter{sentence}
 \newenvironment{sentence}{\par\refstepcounter{sentence}\noindent \textbf{sentence} \thesentence. \par}{\vspace{0.4cm}}
 \newcounter{grammar}
@@ -148,31 +148,5 @@
 \fi
 \newcommand{\emword}[2][]{\expandafter\hyperref[#1]{{\color{red}#2}}}
 \newcommand{\emsent}[2][]{\expandafter\hyperref[#1]{\underline{#2}}}
-\begin{document}
-\begin{word}{apple}{"\ae pl}{3}
-  \begin{enumerate}[label=(\arabic*)]
-    \item aaa
-  \end{enumerate}
-\end{word}
-\begin{word}{thank}{\dh \ae aa\dh \ae s\ae }{3}
-  \begin{enumerate}
-    \item 123
-  \end{enumerate}
-\end{word}
-\begin{word}{wyy}{sb}{10}
-  \begin{enumerate}[label=(\arabic*)]
-    \item wyysb
-  \end{enumerate}
-\end{word}
-\begin{sentence}
-  swyyssb
-\end{sentence}
-\emsent{wyysb}
-\begin{word}{apple}{sb}{3}\label{wo:apple}
-  \begin{enumerate}[label=(\arabic*)]
-    \item  asdf
-  \end{enumerate}
-\end{word}
-\emword[wo:apple]{apple}
 \end{document}
 
