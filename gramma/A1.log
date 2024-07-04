@@ -1,7 +1,7 @@
-This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.4.4)  10 APR 2024 21:31
+This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.4.4)  30 JUN 2024 13:01
  restricted system commands enabled.
-**/Users/evawyy/frlearn/pronunciation/vowel.tex
-(/Users/evawyy/frlearn/pronunciation/vowel.tex
+**/Users/evawyy/frlearn/gramma/A1.tex
+(/Users/evawyy/frlearn/gramma/A1.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 Lua module: luaotfload 2024-02-14 3.28 Lua based OpenType font support
@@ -42,7 +42,7 @@ Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'.
 Inserting `tracingstacklevels' in `input_level_string'. (/usr/local/texlive/202
 4/texmf-dist/tex/latex/subfiles/subfiles.cls
 Document Class: subfiles 2020/11/14 v2.2 Multi-file projects (class)
-Preamble taken from file `../templates/main'
+Preamble taken from file `../templates/main.tex'
 (/usr/local/texlive/2024/texmf-dist/tex/latex/import/import.sty
 Package: import 2020/04/01  v 6.2
 )
@@ -87,6 +87,15 @@ Package: ctablestack 2015/10/01 v1.0 Catcode table stable support
 \luacode@lines=\toks17
 \luacode@table@soft=\catcodetable16
 )
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tipa/tipa.sty
+Package: tipa 2002/08/08 TIPA version 1.1
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tipa/t3enc.def
+File: t3enc.def 2001/12/31 T3 encoding
+)))
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2023/05/13 v2.17o AMS math features
 \@mathmargin=\skip50
@@ -383,15 +392,15 @@ Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 (/usr/local/texlive/2024/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
 luaotfload | cache : Lookup cache loaded from /Users/evawyy/Library/texlive/2024
 /texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
-luaotfload | aux : font no 18 (nil) defines no feature for script latn with lang
+luaotfload | aux : font no 21 (nil) defines no feature for script latn with lang
 uage fra
-luaotfload | aux : font no 23 (nil) does not define feature smcp for script latn
- with language dflt
-luaotfload | aux : font no 24 (nil) does not define feature smcp for script latn
- with language dflt
-luaotfload | aux : font no 25 (nil) does not define feature smcp for script latn
- with language dflt
 luaotfload | aux : font no 26 (nil) does not define feature smcp for script latn
+ with language dflt
+luaotfload | aux : font no 27 (nil) does not define feature smcp for script latn
+ with language dflt
+luaotfload | aux : font no 28 (nil) does not define feature smcp for script latn
+ with language dflt
+luaotfload | aux : font no 29 (nil) does not define feature smcp for script latn
  with language dflt
 
 Package fontspec Info: Font family 'DejaVuSerif(0)' created for font 'DejaVu
@@ -420,36 +429,7 @@ flt;+tlig;family=rm;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
 
-(/usr/local/texlive/2024/texmf-dist/tex/latex/tipa/tipa.sty
-Package: tipa 2002/08/08 TIPA version 1.1
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/tipa/t3enc.def
-File: t3enc.def 2001/12/31 T3 encoding
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/m/sl' in size <10> not availa
-ble
-(Font)              Font shape `TU/DejaVuSerif(0)/m/it' tried instead on input 
-line 316.
-LaTeX Font Info:    Font shape `TU/DejaVuSerif(0)/bx/n' in size <10> not availa
-ble
-(Font)              Font shape `TU/DejaVuSerif(0)/b/n' tried instead on input l
-ine 356.
-LaTeX Font Info:    Trying to load font information for T3+lmss on input line 3
-57.
-LaTeX Font Info:    No file T3lmss.fd. on input line 357.
-LaTeX Font Info:    Trying to load font information for T3+cmr on input line 35
-7.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/tipa/t3cmr.fd
-File: t3cmr.fd 2001/12/31 TIPA font definitions
-)
-
-LaTeX Font Warning: Font shape `T3/lmss/m/n' undefined
-(Font)              using `T3/cmr/m/n' instead on input line 357.
-
-))) (/usr/local/texlive/2024/texmf-dist/tex/latex/forloop/forloop.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/forloop/forloop.sty
 Package: forloop 2023/05/03 v3.0 For Loops for LaTeX
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty
@@ -763,8 +743,9 @@ Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
 \c@grammar=\count336
 \c@article=\count337
 \c@pronuciation=\count338
+\c@practice=\count339
 ))
-(./vowel.aux
+(./A1.aux
 
 Package babel Info: The following font families will use the default
 (babel)             settings for all or some languages:
@@ -779,7 +760,7 @@ Package babel Info: The following font families will use the default
 (babel)             Reported on input line 3.
 
 )
-\openout1 = vowel.aux
+\openout1 = A1.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
@@ -803,6 +784,12 @@ LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 3.
+LaTeX Font Info:    Trying to load font information for T3+cmr on input line 3.
+
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/tipa/t3cmr.fd
+File: t3cmr.fd 2001/12/31 TIPA font definitions
+)
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
@@ -880,23 +867,23 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count339
+\scratchcounter=\count340
 \scratchdimen=\dimen273
 \scratchbox=\box79
-\nofMPsegments=\count340
-\nofMParguments=\count341
+\nofMPsegments=\count341
+\nofMParguments=\count342
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count342
+\MPscratchCnt=\count343
 \MPscratchDim=\dimen274
-\MPnumerator=\count343
-\makeMPintoPDFobject=\count344
+\MPnumerator=\count344
+\makeMPintoPDFobject=\count345
 \everyMPtoPDFconversion=\toks35
 )
 Package hyperref Info: Link coloring OFF on input line 3.
- (./vowel.out) (./vowel.out)
+ (./A1.out) (./A1.out)
 \@outlinefile=\write3
 
-\openout3 = vowel.out
+\openout3 = A1.out
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
@@ -932,71 +919,34 @@ Package hyperref Info: Link coloring OFF on input line 3.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-> Step: init table outer spec.
-> Step: parse table options.
-> Step: split table.
-> Step: init table inner spec.
-> Step: parse table inner spec.
-> Step: execute table commands.
-> Step: calculate cell and line sizes.
-> Step: build the whole table.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
-
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Overfull \hbox (0.50003pt too wide) detected at line 31
-$[][]$[] 
- []
-
-> Step: init table outer spec.
-> Step: parse table options.
-> Step: split table.
-> Step: init table inner spec.
-> Step: parse table inner spec.
-> Step: execute table commands.
-> Step: calculate cell and line sizes.
-> Step: build the whole table.
 [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./vowel.aux)
+(./A1.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-Package rerunfilecheck Info: File `vowel.out' has not changed.
+Package rerunfilecheck Info: File `A1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 )
 
 Here is how much of LuaTeX's memory you used:
- 21921 strings out of 476447
+ 21646 strings out of 476447
  125129,1977958 words of node,token memory allocated
- 771 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 13 glue, 4 kern, 1 penalty, 2 glyph, 90 attribute, 
-53 glue_spec, 15 attribute_list, 1 write nodes
-   avail lists: 1:1,2:11485,3:264,4:99,5:118,6:219,7:3784,8:4,9:3306,10:1,11:28
- 43654 multiletter control sequences out of 65536+600000
- 59 fonts using 13390711 bytes
- 100i,14n,108p,577b,1088s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</Users/evawyy/Library/Fonts/DejaVuSerif-Italic.ttf></Users/evawyy/Library/Fonts
-/DejaVuSerif.ttf></Users/evawyy/Library/Fonts/DejaVuSerif-Bold.ttf></usr/local/t
-exlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/tex
-live/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on vowel.pdf (1 page, 50508 bytes).
+ 601 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 penalty, 2 glyph, 40 attribute, 5
+3 glue_spec, 8 attribute_list, 1 write nodes
+   avail lists: 2:421,3:45,4:21,5:60,6:21,7:508,9:93,10:1,11:27
+ 43388 multiletter control sequences out of 65536+600000
+ 36 fonts using 9513007 bytes
+ 100i,5n,107p,567b,1088s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</Users/evawyy/Library/Fonts/DejaVuSerif.ttf></Users/evawyy/Library/Fonts/DejaVu
+Serif-Bold.ttf>
+Output written on A1.pdf (1 page, 24087 bytes).
 
-PDF statistics: 44 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 131072)
+PDF statistics: 30 PDF objects out of 1000 (max. 8388607)
+ 20 compressed objects within 1 object stream
+ 5 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

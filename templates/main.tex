@@ -1,13 +1,15 @@
 %!TEX TS-program = lualatex
-\documentclass[a4paper]{ctexart}
+\documentclass{article}
 \usepackage{luacode}
+\usepackage[safe]{tipa}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage[english,french]{babel}
 \babelfont{rm}{DejaVu Serif}
-\usepackage{tipa}
-\usepackage{lipsum}
 \usepackage{forloop}
 \usepackage{fontawesome5}
+\usepackage{tabularray}
 \usepackage{enumitem}
+\usepackage{ninecolors}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{geometry}
@@ -20,6 +22,7 @@
   }%
 }
 \makeatother
+\renewcommand{\implies}{\Rightarrow}
 \begin{luacode*}
   local phonetics = {
   A = { tipa = "A", conceal = "𝘢", tirg = "a" },
@@ -123,7 +126,7 @@
     result = result .. fphone[letter].tipa
     end
     result = result .. "/}"
-  tex.print(result) 
+  tex.print(result)
   end
 \end{luacode*}
 \newcommand{\mytipa}[1]{\directlua{TIPA([[#1]])}}
@@ -134,19 +137,46 @@
 \newcounter{sentence}
 \newenvironment{sentence}{\par\refstepcounter{sentence}\noindent \textbf{sentence} \thesentence. \par}{\vspace{0.4cm}}
 \newcounter{grammar}
-\newenvironment{grammar}{\par\refstepcounter{grammar}\noindent \textbf{Grammar focus} \thegrammar. \par}{\vspace{0.4cm}}
+\newenvironment{grammar}[1]{\par\refstepcounter{grammar}\noindent \textbf{Grammar focus} \thegrammar. \textbf{#1}\par}{}
 \newcounter{article}
-\newenvironment{article}[1]{\par\refstepcounter{article}\noindent \begin{center}\large\bf #1\end{center}\par}{\vspace{0.4cm}}
+\newenvironment{article}[1]{\par\refstepcounter{article}\noindent \textbf{Article}\begin{center}\large\bf #1\end{center}\par}{\vspace{0.4cm}}
 \newcounter{pronuciation}
 \newenvironment{pronuciation}{\par\refstepcounter{pronuciation}\noindent \textbf{pronuciation} \thepronuciation. \par}{\vspace{0.4cm}}
+\newcounter{practice}
+\newenvironment{practice}{\par\refstepcounter{practice}\noindent \textbf{practice} \thepractice.}{\vspace{0.4cm}}
 %emphysize
 \newif\ifink
-\inktrue
+% \inktrue
 \ifink
   \renewcommand{\color}[1]{\bf}
   \newgeometry{left=0.5cm,right=0.5cm,top=0.5cm,bottom=0.5cm}
 \fi
 \newcommand{\emword}[2][]{\expandafter\hyperref[#1]{{\color{red}#2}}}
 \newcommand{\emsent}[2][]{\expandafter\hyperref[#1]{\underline{#2}}}
+\DefTblrTemplate{conthead-text}{fanblue}{(Continuer)}
+\DefTblrTemplate{contfoot-text}{fanblue}{(WyyLoveByl)}
+\DefTblrTemplate{middlehead}{fanblue}{(Following above page)}
+\DefTblrTemplate{caption-tag}{fanblue}{TTTTTableeeee\hspace{0.25em}\Roman{table}}
+\DefTblrTemplate{caption-sep}{fanblue}{\(\overset{d}{=}\)}
+\DefTblrTemplate{caption-text}{fanblue}{\InsertTblrText{caption}}
+\DefTblrTemplate{note-tag}{fanblue}{\textsuperscript{\InsertTblrNoteTag}}
+%BUG:THis can't work
+%\DefTblrTemplate{note-sep}{default}{\space}
+\DefTblrTemplate{note-text}{fanblue}{\qquad\InsertTblrNoteText}
+\DefTblrTemplate{remark-tag}{fanblue}{\InsertTblrRemarkTag}
+\DefTblrTemplate{remark-sep}{fanblue}{\myftipa{x}}
+\DefTblrTemplate{remark-text}{fanblue}{\InsertTblrRemarkText}
+\NewTblrTheme{fanblue}{
+  \SetTblrTemplate{conthead-text}{fanblue}
+  \SetTblrTemplate{contfoot-text}{fanblue}
+  \SetTblrTemplate{caption-tag}{fanblue}
+  \SetTblrStyle{firsthead}{font=\bfseries\Huge,fg=green2}
+  \SetTblrStyle{firstfoot}{fg=red2}
+  \SetTblrStyle{middlefoot}{\itshape}
+  \SetTblrStyle{middlehead}{font=\bfseries\small,fg=purple3,halign=c}
+  \SetTblrStyle{caption-tag}{red2}
+}
+\begin{document}
+
 \end{document}
 

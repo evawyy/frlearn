@@ -155,11 +155,95 @@ local makesnip = function(_, snip)
 	end
 	return sn(nil, { c(1, choices) })
 end
+local function zip_add(str, char)
+	if string.find(str, char .. "$") then
+		return str
+	else
+		return str .. char
+	end
+end
+ls.add_snippets("lua", {
+	s(
+		{ trig = "%.([ae])n", regTrig = true, snippetType = "autosnippet" },
+		fmta([[["<>"]={<><><>the="<>",eng="<>"},]], {
+			i(1),
+			f(function(args, snip)
+				local str = args[1][1]
+				if str ~= "" then
+					return [[abbr="]]
+				else
+					return ""
+				end
+			end, { 2 }),
+			i(2),
+			f(function(args, snip)
+				local str = args[1][1]
+				if str ~= "" then
+					return [[",]]
+				else
+					return ""
+				end
+			end, { 2 }),
+			f(function(args, snip)
+				return "l" .. snip.captures[1]
+			end),
+			i(3),
+		}),
+		{}
+	),
+	s({ trig = "(%a);(%a)", wordTrig = false, regTrig = true, snippetType = "autosnippet" }, {
+		d(1, makesnip),
+	}),
+	s(
+		{ trig = "%.adj", regTrig = true, snippetType = "autosnippet" },
+		fmta([[["<>"]={sp="adj.",ns="<><>",fs="<><>",np="<><>",fp="<><>",eng="<>"},]], {
+			i(1),
+			i(2),
+			f(function(args, snip)
+				if args[2][1] == "" then
+					return args[1][1]
+				else
+					return ""
+				end
+			end, { 1, 2 }),
+			i(3),
+			f(function(args, snip)
+				if args[2][1] == "" then
+					return zip_add(args[1][1], "e")
+				else
+					return ""
+				end
+			end, { 1, 3 }),
+			i(4),
+			f(function(args, snip)
+				if args[2][1] == "" then
+					return zip_add(args[1][1], "s")
+				else
+					return ""
+				end
+			end, { 1, 4 }),
+			i(5),
+			f(function(args, snip)
+				local fs = args[2][1]
+				if fs == "" then
+					fs = zip_add(args[1][1], "e")
+				end
+				if args[3][1] == "" then
+					return zip_add(fs, "s")
+				else
+					return ""
+				end
+			end, { 1, 3, 5 }),
+			i(6),
+		}),
+		{}
+	),
+})
 ls.add_snippets("tex", {
 	s(
 		{ trig = ".wo", snippetType = "autosnippet" },
 		fmta(
-			"\\begin{newword}{<>}{\\myftipa{<>}}{<>}\\label{wo:<>}\n\\begin{enumerate}[label=(\\arabic*)]\n\\item <> \n\\end{enumerate}\n\\end{newword}",
+			"\\begin{word}{<>}{\\myftipa{<>}}{<>}\\label{wo:<>}\n\\begin{enumerate}[label=(\\arabic*)]\n\\item <> \n\\end{enumerate}\n\\end{word}",
 			{
 				i(1),
 				i(2),
@@ -185,9 +269,24 @@ ls.add_snippets("tex", {
 		{ condition = line_begin }
 	),
 	s(
-		{ trig = ".gr", snippetType = "autosnippet" },
-		fmta("\\begin{grammar}\n <> \n\\end{grammar}", {
+		{ trig = ".pa", snippetType = "autosnippet" },
+		fmta(
+			"\\begin{practice}<>\n\\begin{enumerate}[label=(\\arabic*)]\n\\item <> \n\\end{enumerate}\n\\end{practice}",
+			{
+				i(1),
+				i(2),
+			}
+		),
+		fmta("\\begin{practice}\n <> \n\\end{practice}", {
 			i(1),
+		}),
+		{ condition = line_begin }
+	),
+	s(
+		{ trig = ".gr", snippetType = "autosnippet" },
+		fmta("\\begin{grammar}{<>}\n <> \n\\end{grammar}", {
+			i(1),
+      i(2),
 		}),
 		{ condition = line_begin }
 	),
@@ -273,4 +372,27 @@ ls.add_snippets("tex", {
 	s({ trig = "(%a);(%a)", wordTrig = false, regTrig = true, snippetType = "autosnippet" }, {
 		d(1, makesnip),
 	}),
+	s(
+		{ trig = "udl", snippetType = "snippet" },
+		fmta("\\underline{<>}", {
+			i(1),
+		}),
+		{}
+	),
+	-- s(
+	-- 	{ trig = ".vs", snippetType = "autosnippet" },
+	-- 	fmta([[["<>"]={je="<>",tu="<>",il="<>",elle="<><>",nous="<>",vous="<>",ils="<>",elles="<><>"},]], {
+	-- 		i(1),
+	-- 		i(2),
+	-- 		i(3),
+	-- 		i(4),
+	-- 		rep(3),
+	-- 		i(5),
+	-- 		i(6),
+	-- 		i(7),
+	-- 		i(8),
+	-- 		rep(7),
+	-- 	}),
+	-- 	{}
+	-- ),
 })

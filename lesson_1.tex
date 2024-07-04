@@ -1,0 +1,219 @@
+%!TEX TS-program = lualatex
+\documentclass[./templates/main.tex]{subfiles}
+\begin{document}
+\section{gramma}
+\begin{word}{chercher}{\myftipa{}}{5}\label{wo:parler}
+  \begin{enumerate}[label=(\arabic*)]
+    \item = to look for v. 1
+    \item je cherche nous cherchons
+    \item tu cherches vous cherchez
+    \item il cherche ils cherchent
+    \item elle cherche elles cherchent
+  \end{enumerate}
+\end{word}
+\begin{word}{habiter}{\myftipa{abite}}{5}\label{wo:habiter}
+  \begin{enumerate}[label=(\arabic*)]
+    \item = to live v. 1
+    \item j'habite nous habitons
+    \item tu habites vous habitez
+    \item il habite ils habitent
+    \item elle habite elles habitent
+  \end{enumerate}
+\end{word}
+\begin{word}{parler}{\myftipa{parle}}{5}\label{wo:parler}
+  \begin{enumerate}[label=(\arabic*)]
+    \item =to speak v. 1
+    \item je parle nous parlons
+    \item tu parles vous parlez
+    \item il parle ils parlent
+    \item elle parle elles parlent
+  \end{enumerate}
+\end{word}
+\begin{word}{aimer}{\myftipa{eme}}{5}\label{wo:aimer}
+  \begin{enumerate}[label=(\arabic*)]
+    \item =to love v.1
+    \item j'aime nous aimons
+    \item tu aimes vous aimez
+    \item il aime ils aiment
+    \item elle aime elles aiment
+  \end{enumerate}
+\end{word}
+\begin{word}{prendre}{\myftipa{prqdr}}{5}\label{wo:prendre}
+  \begin{enumerate}[label=(\arabic*)]
+    \item = to take v.
+    \item je prends nous prenons
+    \item tu prends vous prenez
+    \item il/elle prend ils/elles prennent
+  \end{enumerate}
+\end{word}
+\begin{word}{aller}{\myftipa{ale}}{5}\label{wo:aller}
+  \begin{enumerate}[label=(\arabic*)]
+    \item = to go v.
+    \item je vais nous allons
+    \item tu vas vous allez
+    \item il/elle va ils/elles vont
+  \end{enumerate}
+\end{word}
+\begin{word}{avoir}{\myftipa{avwar}}{5}\label{wo:avoir}
+  \begin{enumerate}[label=(\arabic*)]
+    \item =to have v.
+    \item j'ai nous avons
+    \item tu as vous avez
+    \item il/elle a ils/elles ont
+  \end{enumerate}
+\end{word}
+\begin{word}{partir}{\myftipa{partir}}{5}\label{wo:partir}
+  \begin{enumerate}[label=(\arabic*)]
+    \item =to leave/go v.
+    \item je pars nous partons
+    \item tu pars vous partez
+    \item il/elle part ils/elles partent
+  \end{enumerate}
+\end{word}
+\begin{word}{être}{\myftipa{etr}}{5}\label{wo:être}
+  \begin{enumerate}[label=(\arabic*)]
+    \item = to be v.
+    \item je suis nous sommes
+    \item tu es vous êtes
+    \item il/elle est ils/elles sont
+  \end{enumerate}
+\end{word}
+\begin{word}{porter}{\myftipa{porte}}{4}\label{wo:porter}
+  \begin{enumerate}[label=(\arabic*)]
+    \item = to wear v.
+    \item je porte nous portons
+    \item tu portes vous portez
+    \item il/elle porte ils/elles portent
+  \end{enumerate}
+\end{word}
+\begin{grammar}
+  quelle heure est-il?
+  Il est une heure(f) trente.
+  Il est deux heures.
+\end{grammar}
+\begin{grammar}
+  \begin{tblr}{|c|c|c|c|}
+    \hline
+             & \SetCell[c=2]{c} singulier &                     & pluriel             \\
+    \hline
+    masculin & le                         & \SetCell[r=2]{c} l' & \SetCell[r=2]{c}les \\
+    \hline
+    féminin  & la                         &                     &                     \\
+    \hline
+  \end{tblr}
+\end{grammar}
+\begin{grammar}
+  --Où est le chat?
+  -- Le chat est \rule{5em}{0.3mm} le lit.
+
+  \begin{tblr}{|c|c|}
+    dans        & in              \\
+    sur         & on              \\
+    sous        & under           \\
+    devant      & in front of     \\
+    derrière    & behind          \\
+    entre       & between         \\
+    à côté de   & next            \\
+    à droite de & on the right of \\
+    à gauche de & on the left of  \\
+
+  \end{tblr}
+
+  de le = du
+  de les =des
+\end{grammar}
+\begin{grammar}
+  \begin{tblr}{|c|c|}
+    \hline
+    \SetCell[r=7]{c}    en & voiture \\
+                           & bateau  \\
+                           & avion   \\
+                           & train   \\
+                           & méto    \\
+                           & bus     \\
+                           & taxi    \\
+                           & école   \\
+    \hline
+    \SetCell[r=4]{c}à      & vélo    \\
+                           & scooter \\
+                           & moto    \\
+                           & pied    \\
+                           &
+    \hline
+  \end{tblr}
+\end{grammar}
+\begin{luacode*}
+  local noun=require("nwords")
+  noun()
+  local adj=require("awords")
+  adj()
+\end{luacode*}
+\begin{grammar}
+  negation \\
+  v. : ne v. pas \\
+  (aeiouh)v. : n' v. pas
+\end{grammar}
+
+\section{practise}
+--Qu'est-ce que c'est?
+--C'est le chapeuo.
+
+\begin{practice}
+  Conjuguez le verbe au présent:
+  \begin{enumerate}[label=(\arabic*)]
+    \item Nous \underline{habitons} à Paris.(habiter)
+    \item Elles \underline{cherchent} un stylo.(chercher)
+    \item \underline{J'habite} à Tokyo.(Je habiter)
+    \item Nous \underline{cherchons} un chien.(chercher)
+    \item Vous \underline{habitez} en France.(habiter)
+    \item Je \underline{cherche} un livre.(chercher)
+    \item Tu \underline{habites} à Chendu.(habiter)
+    \item Elle \underline{cherche} une feuille.(chercher)
+  \end{enumerate}
+\end{practice}
+\begin{practice}
+  Conjuguez le verbe partir au présent:
+  \begin{enumerate}[label=(\arabic*)]
+    \item Mardi, je \underline{pars} travail à 9h15.
+    \item Le train \underline{part} à 7h28.
+    \item Les enfants \underline{partent} à l’école à 8h45.
+    \item Vous \underline{partez} à 13h?
+    \item Non, nous \underline{partons} à 13h10?
+    \item À quelle heure \underline{pars} tu? À 17h35.
+    \item Sophie et Anne \underline{partent} après la fête, à 23h30.
+    \item La professeure \underline{part}de l’école à 15h40.
+    \item Une fois par semaine, tu \underline{pars} au supermarché.
+    \item Vendredi, nous \underline{partons} en vacances.
+  \end{enumerate}
+\end{practice}
+\begin{practice} avoir les yeux/cheveux(m.p.) couleur
+  \begin{enumerate}[label=(\arabic*)]
+    \item Il est grand et mince. Il a les yeux noirs et les cheveux blonds.
+    \item Elle est petite et grosse. Elle a les yeux bleus et cheveux bruns.
+  \end{enumerate}
+\end{practice}
+\begin{practice}Conjuguez le verbe porter au présent
+  \begin{enumerate}[label=(\arabic*)]
+    \item Elle \rule{5em}{0.3mm} une robe violette.
+    \item Il  \rule{5em}{0.3mm} un manteau noir.
+    \item Tu  \rule{5em}{0.3mm} un pull jaune.
+    \item Nous  \rule{5em}{0.3mm} une chemise blanche.
+    \item Elles  \rule{5em}{0.3mm} une jupe noire.
+    \item Vous  \rule{5em}{0.3mm} une veste verte.
+    \item Je  \rule{5em}{0.3mm} un jean bleu.
+    \item Ils  \rule{5em}{0.3mm} un polo rouge.
+  \end{enumerate}
+\end{practice}
+\begin{practice}Je/aller/le taxi - Je vais en taxi.
+  \begin{enumerate}[label=(\arabic*)]
+    \item Nous/aller/le bus - Nous allons en bus.
+    \item Vous/aller/le train - Vous allez en train.
+    \item Elle/aller/le vélo - Elle va à vélo.
+    \item Ils/aller/la voiture - Ils vont en voiture.
+    \item Je/aller/le métro - Je vais à métro.
+    \item Paul/aller/la moto - Paul va à moto.
+    \item Tu/aller/le scooter - Tu vas à scooter.
+    \item Léa et Sophie/aller/l’avion - Lèa et Sophie vont en l'avion.
+  \end{enumerate}
+\end{practice}
+\end{document}
