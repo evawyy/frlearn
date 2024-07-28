@@ -4,7 +4,7 @@ local vswords_table = {
 		["passe_sim"] = { je = "fus", tu = "fus", il = "fut", nous = "fûmes", vous = "fûtes", ils = "furent" },
 	},
   ["avoir"] = {
-["present"] = 
+["present"] = {},
   },
   ["aller"]={},
 }

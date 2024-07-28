@@ -17,6 +17,7 @@ local in_tipa = function()
 	line = string.sub(line, 0, c)
 	return string.match(line, "\\myf?tipa{[^}]*$")
 end
+
 --Personal snippet setting for spechial characters in french alphebet
 --
 
@@ -164,6 +165,27 @@ local function zip_add(str, char)
 end
 ls.add_snippets("lua", {
 	s(
+		{ trig = ".vs", snippetType = "autosnippet" },
+		fmta([[["<>"]={je="<>",tu="<>",il="<>",elle="<><>",nous="<>",vous="<>",ils="<>",elles="<><>"},]], {
+			i(1),
+			i(2),
+			i(3),
+			i(4),
+			i(5),
+			f(function(args, snip)
+				return args[2][1] == "" and args[1][1] or ""
+			end, { 4, 5 }),
+			i(6),
+			i(7),
+			i(8),
+			i(9),
+			f(function(args, snip)
+				return args[2][1] == "" and args[1][1] or ""
+			end, { 8, 9 }),
+		}),
+		{}
+	),
+	s(
 		{ trig = "%.([ae])n", regTrig = true, snippetType = "autosnippet" },
 		fmta([[["<>"]={<><><>the="<>",eng="<>"},]], {
 			i(1),
@@ -200,11 +222,7 @@ ls.add_snippets("lua", {
 			i(1),
 			i(2),
 			f(function(args, snip)
-				if args[2][1] == "" then
-					return args[1][1]
-				else
-					return ""
-				end
+				return args[2][1] == "" and args[1][1] or ""
 			end, { 1, 2 }),
 			i(3),
 			f(function(args, snip)
@@ -286,7 +304,7 @@ ls.add_snippets("tex", {
 		{ trig = ".gr", snippetType = "autosnippet" },
 		fmta("\\begin{grammar}{<>}\n <> \n\\end{grammar}", {
 			i(1),
-      i(2),
+			i(2),
 		}),
 		{ condition = line_begin }
 	),
@@ -379,20 +397,4 @@ ls.add_snippets("tex", {
 		}),
 		{}
 	),
-	-- s(
-	-- 	{ trig = ".vs", snippetType = "autosnippet" },
-	-- 	fmta([[["<>"]={je="<>",tu="<>",il="<>",elle="<><>",nous="<>",vous="<>",ils="<>",elles="<><>"},]], {
-	-- 		i(1),
-	-- 		i(2),
-	-- 		i(3),
-	-- 		i(4),
-	-- 		rep(3),
-	-- 		i(5),
-	-- 		i(6),
-	-- 		i(7),
-	-- 		i(8),
-	-- 		rep(7),
-	-- 	}),
-	-- 	{}
-	-- ),
 })
