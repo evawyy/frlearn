@@ -11,13 +11,19 @@ local extras = require("luasnip.extras")
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 local rep = extras.rep
 local fmta = require("luasnip.extras.fmt").fmta
+local latex=require("latex.conditions")
 local in_tipa = function()
-	local line = vim.api.nvim_get_current_line()
-	local r, c = unpack(vim.api.nvim_win_get_cursor(0))
-	line = string.sub(line, 0, c)
-	return string.match(line, "\\myf?tipa{[^}]*$")
+  return latex.in_cmd_arg({"mytipa","myftipa","tipa"},nil,false)
 end
-
+local sqlite=require("sqlite")
+local dbpath=vim.fn.expand("%:h:p")
+local lefff_db = sqlite.new(dbpath.."/lefff.db",{open_mode="ro",})
+local gender2color={
+  [0]="red",
+  [1]="pink",
+  [2]="blue",
+  [3]="purple"
+}
 --Personal snippet setting for spechial characters in french alphebet
 --
 
@@ -397,4 +403,24 @@ ls.add_snippets("tex", {
 		}),
 		{}
 	),
+  s(
+    {trig = "([a-zA-ZèéëêèÉËÈÊàâÀÂôùüûÜÙÛîïÎÏœŸÿŒçÇ]+)([^a-zA-ZèéëêèÉËÈÊàâÀÂôùüûÜÙÛîïÎÏœŸÿŒçÇ])",snippetType="autosnippet",regTrig=true},
+    fmta("<>",{
+      f(function (_,snip)
+        local gender = lefff_db:with_open(function()
+          return lefff_db:select("genre",{
+            select={"gender"},
+            where={word=snip.captures[1]}
+          })
+        end)[1]
+        if not gender then
+          return snip.captures[1]..snip.captures[2]
+        end
+        return "\\textcolor{"..gender2color[gender.gender].."}{"..snip.captures[1].."}"..snip.captures[2]
+      end),
+    }),
+    {condition=function ()
+      return latex.in_env("french",true)
+    end}
+  ),
 })
