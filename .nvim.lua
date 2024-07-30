@@ -305,8 +305,7 @@ ls.add_snippets("tex", {
 	),
   s(
     {trig = ".fc", snippetType = "autosnippet"},
-      fmta(
-      "\\begin{french}<>\n\\end{french}",{
+      fmta("\\begin{french}\n<>\n\\end{french}",{
         i(1),
       }
     ), {condition = line_begin}
