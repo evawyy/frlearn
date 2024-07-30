@@ -19,9 +19,9 @@ local sqlite=require("sqlite")
 local dbpath=vim.fn.expand("%:h:p")
 local lefff_db = sqlite.new(dbpath.."/lefff.db",{open_mode="ro",})
 local gender2color={
-  [0]="red",
-  [1]="pink",
-  [2]="blue",
+  [0]="green",
+  [1]="ble",
+  [2]="red",
   [3]="purple"
 }
 --Personal snippet setting for spechial characters in french alphebet
@@ -301,11 +301,16 @@ ls.add_snippets("tex", {
 				i(2),
 			}
 		),
-		fmta("\\begin{practice}\n <> \n\\end{practice}", {
-			i(1),
-		}),
 		{ condition = line_begin }
 	),
+  s(
+    {trig = ".fc", snippetType = "autosnippet"},
+      fmta(
+      "\\begin{french}<>\n\\end{french}",{
+        i(1),
+      }
+    ), {condition = line_begin}
+  ),
 	s(
 		{ trig = ".gr", snippetType = "autosnippet" },
 		fmta("\\begin{grammar}{<>}\n <> \n\\end{grammar}", {
@@ -404,7 +409,7 @@ ls.add_snippets("tex", {
 		{}
 	),
   s(
-    {trig = "([a-zA-ZèéëêèÉËÈÊàâÀÂôùüûÜÙÛîïÎÏœŸÿŒçÇ]+)([^a-zA-ZèéëêèÉËÈÊàâÀÂôùüûÜÙÛîïÎÏœŸÿŒçÇ])",snippetType="autosnippet",regTrig=true},
+    {trig = "([a-zA-ZèéëêèÉËÈÊàâÀÂôùüûÜÙÛîïÎÏœŸÿŒçÇ]+)([^a-zA-ZèéëêèÉËÈÊàâÀÂôùüûÜÙÛîïÎÏœŸÿŒçÇ{}])",snippetType="autosnippet",regTrig=true},
     fmta("<>",{
       f(function (_,snip)
         local gender = lefff_db:with_open(function()
@@ -416,7 +421,7 @@ ls.add_snippets("tex", {
         if not gender then
           return snip.captures[1]..snip.captures[2]
         end
-        return "\\textcolor{"..gender2color[gender.gender].."}{"..snip.captures[1].."}"..snip.captures[2]
+        return "\\mytextcolor{"..gender2color[gender.gender].."}{"..snip.captures[1].."}"..snip.captures[2]
       end),
     }),
     {condition=function ()
