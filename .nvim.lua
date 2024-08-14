@@ -11,17 +11,58 @@ local extras = require("luasnip.extras")
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 local rep = extras.rep
 local fmta = require("luasnip.extras.fmt").fmta
-local latex=require("latex.conditions")
+local latex=require("latex.conditions.luasnip")
 local in_tipa = function()
   return latex.in_cmd_arg({"mytipa","myftipa","tipa"},nil,false)
+end
+-- Generating functions for Matrix/Cases - thanks L3MON4D3!
+---@param str string
+local function count_column(str)
+  if string.find(str, "colspec") then
+    str = string.match(str, "colspec%s*=%s*(%b{})")
+    str = string.match(str, "^{(.*)}$")
+  else
+    local test = string.gsub(str, "%b{}", "")
+    if string.find(test, "=") then
+      return nil
+    end
+  end
+  str = string.gsub(str, [[|]], "")
+  str = string.gsub(str, [=[%b[]]=], "")
+  str = string.gsub(str, [=[%b{}]=], "")
+  return string.len(str)
+end
+local function get_column_in_tblr()
+  local curcol = vim.api.nvim_win_get_cursor(0)[1]
+  local line = ""
+  while curcol > 1 do
+    line = vim.api.nvim_buf_get_lines(0, curcol - 1, curcol, false)[1]
+    if string.match(line, "^\\begin{tblr}") then
+      return tonumber(string.match(line, "%%!column%s*=%s*(.*)$"))
+    end
+    curcol = curcol - 1
+  end
+end
+local generate_oneline = function(col)
+  if not col or col == 0 then
+    return sn(nil, { r(1, "1", i(1)) })
+  end
+  local nodes = {}
+  for j = 1, col - 1 do
+    table.insert(nodes, r(j, tostring(j), i(1)))
+    table.insert(nodes, t(" & "))
+  end
+  table.insert(nodes, r(col, tostring(col), i(1)))
+  table.insert(nodes, t({ "\\\\" }))
+  return sn(nil, nodes)
 end
 local sqlite=require("sqlite")
 local dbpath=vim.fn.expand("%:h:p")
 local lefff_db = sqlite.new(dbpath.."/lefff.db",{open_mode="ro",})
 local gender2color={
-  [0]="green",
-  [1]="ble",
-  [2]="red",
+  [0]="SeaGreen",
+  [1]="CornflowerBlue",
+  [2]="CarnationPink",
   [3]="purple"
 }
 --Personal snippet setting for spechial characters in french alphebet
@@ -265,24 +306,39 @@ ls.add_snippets("lua", {
 })
 ls.add_snippets("tex", {
 	s(
+		{ trig = ".se", snippetType = "autosnippet" },
+		fmta("\\begin{sentence}<><><>\n <> \n\\end{sentence}", {
+			f(function(args, snip)
+          return args[1][1] ~= "" and "\\label{se:" or ""
+      end,{1}),
+      i(1),
+      f(function(args,snip)
+        return args[1][1] ~= "" and "}" or "" 
+      end,{1}),
+      i(2),
+    },
+		{ condition = line_begin }
+	)
+),
+	s(
 		{ trig = ".wo", snippetType = "autosnippet" },
 		fmta(
-			"\\begin{word}{<>}{\\myftipa{<>}}{<>}\\label{wo:<>}\n\\begin{enumerate}[label=(\\arabic*)]\n\\item <> \n\\end{enumerate}\n\\end{word}",
+			"\\begin{word}{<>}{\\myftipa{<>}}{<>}\\label{wo:<>}\n<><><>\\begin{enumerate}[label=(\\arabic*)]\n\\item <> \n\\end{enumerate}\n\\end{word}",
 			{
 				i(1),
 				i(2),
 				i(3),
 				rep(1),
-				i(4),
+        f(function (args,_)
+          return args[1][1] ~= "" and "\\textcolor{purple}{" or ""
+        end,{4}),
+        i(4),
+        f(function (args,_)
+          return args[1][1] ~= "" and ".} " or ""
+        end,{4}),
+        i(5),
 			}
 		),
-		{ condition = line_begin }
-	),
-	s(
-		{ trig = ".se", snippetType = "autosnippet" },
-		fmta("\\begin{sentence}\n <> \n\\end{sentence}", {
-			i(1),
-		}),
 		{ condition = line_begin }
 	),
 	s(
@@ -304,11 +360,11 @@ ls.add_snippets("tex", {
 		{ condition = line_begin }
 	),
   s(
-    {trig = ".fc", snippetType = "autosnippet"},
+    {trig = "fj", snippetType = "autosnippet"},
       fmta("\\begin{french}\n<>\n\\end{french}",{
         i(1),
       }
-    ), {condition = line_begin}
+    ), {}
   ),
 	s(
 		{ trig = ".gr", snippetType = "autosnippet" },
@@ -417,14 +473,75 @@ ls.add_snippets("tex", {
             where={word=snip.captures[1]}
           })
         end)[1]
-        if not gender then
-          return snip.captures[1]..snip.captures[2]
+        local word = snip.captures[1]..snip.captures[2]
+        if not gender or snip.captures[1]=="item" or snip.captures[1]=="est" or snip.captures[2]==";"then
+          return word
         end
         return "\\mytextcolor{"..gender2color[gender.gender].."}{"..snip.captures[1].."}"..snip.captures[2]
       end),
     }),
     {condition=function ()
-      return latex.in_env("french",true)
+      return latex.in_env("french",true)  
     end}
+  ),
+  s(
+    { trig = "tblr", snippetType = "autosnippet" },
+    fmta(
+      [[
+\begin{tblr}<><><>{<>} %!column = <>
+<>
+<>
+\end{tblr}
+    ]],
+      {
+        f(function(args, snip)
+          return args[1][1] ~= "" and "[" or ""
+        end, { 1 }),
+        i(1),
+        f(function(args, snip)
+          return args[1][1] ~= "" and "]" or ""
+        end, { 1 }),
+        i(2),
+        f(function(args, snip)
+          local col = count_column(args[1][1])
+          return tostring(col)
+        end, { 2 }),
+        d(3, function(args, snip)
+          local col = count_column(args[1][1])
+          return generate_oneline(col)
+        end, { 2 }),
+        i(4),
+      }
+    ),
+    { condition = line_begin }
+  ),
+  s(
+    { trig = "([^%s])", regTrig = true, snippetType = "autosnippet" },
+    fmta(
+      [[
+<><>
+<>
+]],
+      {
+        f(function(_, snip)
+          return snip.captures[1]
+        end),
+        d(1, function()
+          local col = get_column_in_tblr()
+          return generate_oneline(col)
+        end),
+        i(0),
+      }
+    ),
+    {
+      condition = function()
+        if not latex.in_env("tblr",true) then
+          return false
+        end
+        local curcol = vim.api.nvim_win_get_cursor(0)[1]
+        local line = vim.api.nvim_buf_get_lines(0, curcol - 1, curcol, false)[1]
+        return string.match(line, "^%s*[^%s]$")
+      end,
+    }
   ),
 })

@@ -1,16 +1,16 @@
 %!TEX TS-program = lualatex
-\documentclass{article}
+\documentclass{ctexart}
 \usepackage{luacode}
 \usepackage[safe]{tipa}
 \usepackage{amsmath,amssymb,amsthm}
-\usepackage[english,french]{babel}
+\usepackage[french,english]{babel}
 \babelfont{rm}{DejaVu Serif}
 \usepackage{forloop}
 \usepackage{fontawesome5}
 \usepackage{tabularray}
 \usepackage{enumitem}
 \usepackage{ninecolors}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{hyperref}
 \usepackage{geometry}
 \usepackage{subfiles}
@@ -133,7 +133,7 @@
 \newcommand{\myftipa}[1]{\directlua{FTIPA([[#1]])}}
 %environment setting
 \newcounter{word}
-\newenvironment{word}[3]{\par\refstepcounter{word}\noindent\theword. \textbf{#1} #2\hfill \stars{#3}}{\vspace{0.4cm}}
+\newenvironment{word}[3]{\par\refstepcounter{word}\noindent\theword. \textbf{#1} #2\hfill \stars{#3}\par}{\vspace{0.4cm}}
 \newcounter{sentence}
 \newenvironment{sentence}{\par\refstepcounter{sentence}\noindent \textbf{sentence} \thesentence. \par}{\vspace{0.4cm}}
 \newcounter{grammar}
